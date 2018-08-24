@@ -9,7 +9,6 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Documents/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
@@ -149,3 +148,14 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+# Gradle
+alias gc="gradle clean"
+alias gt="gradle test"
+alias gb="gc build"
+alias ge="gc cleanEclipse eclipse"
+alias gwb="./gradlew clean build"
+alias gwe="./gradlew clean cleanEclipse eclipse"
+
+#Docker
+alias d="docker"
