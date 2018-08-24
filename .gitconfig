@@ -6,6 +6,9 @@
 	# View the current working tree status using the short format
 	s = status -s
 
+	# View the current working tree status
+	st = status
+
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
@@ -17,6 +20,9 @@
 
 	# Clone a repository including all submodules
 	c = clone --recursive
+
+	# Checkout
+	co = checkout
 
 	# Commit all changes
 	ca = !git add -A && git commit -av
@@ -78,6 +84,10 @@
 			git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
 		fi \
 	}; f"
+
+	ph = push origin HEAD
+	cob = !git fetch origin && git checkout -b $1 origin/$1 && echo \"Checked out origin branch:\"
+	cod = "!git branch -D $1 2> /dev/null; git cob $1"
 
 [apply]
 
