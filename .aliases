@@ -157,5 +157,25 @@ alias ge="gc cleanEclipse eclipse"
 alias gwb="./gradlew clean build"
 alias gwe="./gradlew clean cleanEclipse eclipse"
 
-#Docker
+# Docker
 alias d="docker"
+alias d="docker"
+alias dC="d exec -it cassandra cqlsh"
+alias dM="d exec -it mongo mongo"
+
+# Cassandra
+alias crun="d container run --rm --name cassandra -v cassandra:/var/lib/cassandra -e CASSANDRA_LISTEN_ADDRESS=localhost -p 9042:9042 -d cassandra:3.7"
+alias cqa="ssh -i ~/Keys/moobie.pem centos@172.16.6.86"
+
+# Mongo
+alias mrun="d run --rm --net=host --name mongo -v /volumes/mongo:/etc/mongo -d mongo:3.4.17-jessie"
+
+# Kafka
+alias krun="d container run -d -p 2181:2181 -p 9092:9092 -e ADVERTISED_HOST=$(ipconfig getifaddr en0) -e ADVERTISED_PORT=9092 -e KAFKA_ADVERTISED_HOST_NAME=$(ipconfig getifaddr en0) --rm --name kafka spotify/kafka"
+alias klist="d exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --list --zookeeper localhost:2181"
+alias kcreate="d exec kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic $1"
+alias kproducer="d run -it --rm spotify/kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic $1"
+alias kconsumer="d run -it --rm spotify/kafka /opt/kafka_2.11-0.10.1.0/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic $1 --from-beginning"
+
+alias rehash="source ~/.bashrc"
+
