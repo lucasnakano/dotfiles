@@ -169,3 +169,35 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+function cassandra() {
+    cassandra_env="node-qa-1.cassandra"
+    env="QA"
+
+    if [[ "$1" == "prod" ]]; then
+        cassandra_env="node-1.cassandra"
+        env=PROD
+    fi
+
+    node_ip=$(dcos task | grep "$cassandra_env" | awk '{print $2}')
+    mesos_id=$(dcos node | grep $node_ip | awk '{print $3}')
+
+    echo "Connecting in machine with cassandra" $env $mesos_id
+    dcos node ssh --mesos-id=$mesos_id --master-proxy
+}
+
+function mongo() {
+    mongo_env="node-qa.mongo"
+    env="QA"
+
+    if [[ "$1" == "prod" ]]; then
+        mongo_env="node-1.mongo"
+        env=PROD
+    fi
+
+    node_ip=$(dcos task | grep "$mongo_env" | awk '{print $2}')
+    mesos_id=$(dcos node | grep "$node_ip" | awk '{print $3}')
+
+    echo "Connecting in machine with mongo" $env
+    dcos node ssh --mesos-id=$mesos_id --master-proxy
+}
