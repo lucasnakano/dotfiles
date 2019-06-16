@@ -170,6 +170,7 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
+# moObie
 function cassandra() {
     cassandra_env="node-qa-1.cassandra"
     env="QA"
@@ -186,6 +187,7 @@ function cassandra() {
     dcos node ssh --mesos-id=$mesos_id --master-proxy
 }
 
+# moObie
 function mongo() {
     mongo_env="node-qa.mongo"
     env="QA"
